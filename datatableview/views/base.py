@@ -116,7 +116,7 @@ class DatatableMixin(DatatableJSONResponseMixin, MultipleObjectMixin):
         return self.datatable_class
 
     def get_datatable_kwargs(self, **kwargs):
-        queryset = self.get_queryset()
+        queryset = self.object_list if hasattr(self, 'object_list') else self.get_queryset()
         kwargs.update({
             'object_list': queryset,
             'view': self,
